@@ -1,0 +1,18 @@
+.lower
+	.row
+		.col-sm-8.col-sm-offset-2.col-md-4.col-md-offset-4
+			%h1 Log in
+			.jumbotron
+				= form_for(:session, url: login_path) do |f|
+					.form-group
+						= f.label :email
+						= f.email_field :email, class: 'form-control'
+					
+					.form-group
+						= f.label :password
+						= f.password_field :password, class: 'form-control'
+
+					= f.submit "Zaloguj", class: "btn btn-primary btn-block btn-lg"
+
+
+
