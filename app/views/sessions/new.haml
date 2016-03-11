@@ -1,7 +1,7 @@
 .lower
 	.row
 		.col-sm-8.col-sm-offset-2.col-md-4.col-md-offset-4
-			%h1 Log in
+			%h1 Logowanie
 			.jumbotron
 				= form_for(:session, url: login_path) do |f|
 					.form-group
@@ -11,6 +11,11 @@
 					.form-group
 						= f.label :password
 						= f.password_field :password, class: 'form-control'
+
+					.form-group
+						= f.label :remember_me, class: 'checkbox' do
+							= f.check_box :remember_me
+							%span Zapamiętaj mnie
 
 					= f.submit "Zaloguj", class: "btn btn-primary btn-block btn-lg"
 
