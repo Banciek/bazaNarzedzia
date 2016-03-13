@@ -1,0 +1,7 @@
+%h1= "Edycja użytkownika: "
+%h1= @user.name
+
+= render 'form'
+
+= link_to 'Show', @user |
+= link_to 'Back', users_path 

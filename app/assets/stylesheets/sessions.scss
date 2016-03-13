@@ -2,18 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.alert {
-	top: 40px;
-}
-
-.lower{
-	padding-top: 100px;
-}
-
 .checkbox{
 	text-align: center;
 
 	span{
 		font-weight: normal;
 	}
+}
+#flash {
+	position: absolute;
+	margin: 0;
+	top: 0;
+	left: 50%;
+    margin-right: -50%;
+    transform: translateX(-50%);
+    display: none;
+    min-width: 400px;
+    text-align: center; 
 }
