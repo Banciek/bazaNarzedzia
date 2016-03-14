@@ -1,0 +1,6 @@
+%h1 Baza_narzedzia
+
+%p= "Witaj " + @user.name
+%p Kliknij w link poniżej aby aktywować konto
+= link_to "Aktywuj!", edit_account_activation_url(@user.activation_token, email: @user.email)
+

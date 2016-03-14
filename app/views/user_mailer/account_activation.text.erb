@@ -1,0 +1,6 @@
+Baza_Narzedzia
+
+Witaj <%= @user.name %>, 
+
+Kliknij w link poniżej aby aktywować konto
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
