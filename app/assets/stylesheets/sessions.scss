@@ -9,17 +9,11 @@
 		font-weight: normal;
 	}
 }
-#flash {
-	position: absolute;
-	margin: 0;
-	top: 0px;
-	left: 50%;
-    margin-right: -50%;
-    transform: translateX(-50%);
-    display: none;
-    min-width: 400px;
-    text-align: center;
-    z-index: 2000;
+a#password-reset:hover{
+	text-decoration: none;
+	background-color: transparent;
+	color: #286090;
 }
+
 
 

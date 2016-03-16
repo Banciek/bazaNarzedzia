@@ -1,0 +1,14 @@
+.row
+	.col-sm-8.col-sm-offset-2.col-md-4.col-md-offset-4
+		%h1 Resetowanie hasła
+		.jumbotron
+			= form_for(@user, url: password_reset_path) do |f|
+				= hidden_field_tag :email, @user.email
+				.form-group
+					= f.label :password, "Nowe hasło:"
+					= f.email_field :password, class: 'form-control'
+				.form-group
+					= f.label :password_confirmation, "Powtórz nowe hasło:"
+					= f.email_field :password_confirmation, class: 'form-control'
+
+				= f.submit "Akceptuj", class: "btn btn-primary btn-block btn-lg"

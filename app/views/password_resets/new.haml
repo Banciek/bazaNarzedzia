@@ -1,0 +1,10 @@
+.row
+	.col-sm-8.col-sm-offset-2.col-md-4.col-md-offset-4
+		%h1 Resetowanie hasła
+		.jumbotron
+			= form_for(:password_reset, url: password_resets_path) do |f|
+				.form-group
+					= f.label :email
+					= f.email_field :email, class: 'form-control'
+
+				= f.submit "Resetuj", class: "btn btn-primary btn-block btn-lg"

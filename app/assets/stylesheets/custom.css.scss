@@ -4,3 +4,15 @@
 body {
 	padding-top: 50px;
 }
+#flash {
+	position: absolute;
+	margin: 0;
+	top: 0px;
+	left: 50%;
+    margin-right: -50%;
+    transform: translateX(-50%);
+    display: none;
+    min-width: 400px;
+    text-align: center;
+    z-index: 2000;
+}

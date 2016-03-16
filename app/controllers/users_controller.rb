@@ -30,12 +30,12 @@ class UsersController < ApplicationController
 
     #respond_to do |format|
       if @user.save
-        UserMailer.account_activation(@user).deliver_now 
+        @user.send_activation_email
         flash.now[:info] = 'Użytkownik utworzony, oczekuje na potwierdzenie adresu email'
         render :new
        # format.json { render :show, status: :created, location: @user }
       else
-        flash.now[:info] = 'Wystąpił błąd zapisu, prosimy spróbować ponownie'
+        flash.now[:info] = 'Wystąpił błąd, prosimy spróbować ponownie'
         render :new
        # format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
     def logged_in_user
