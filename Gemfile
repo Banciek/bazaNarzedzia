@@ -9,6 +9,7 @@ gem 'rails', '4.2.5.2'
 gem 'pg'
 # Haml
 gem 'haml'
+gem 'haml-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -27,9 +28,10 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+# gem for managing cookies by jQuery
+gem 'js_cookie_rails'
 # Use ActiveModel has_secure_password
- gem 'bcrypt'
+gem 'bcrypt'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

@@ -1,0 +1,47 @@
+= form_for(@company) do |f|
+  - if @company.errors.any?
+    .alert.alert-danger
+      %strong 
+        = pluralize(@company.errors.count, "error") 
+        prohibited this company from being saved:
+
+      %ul
+        - @company.errors.full_messages.each do |message| 
+          %li= message
+
+  .form-group
+    = f.label 'Nazwa'
+    = f.text_field :name, class: 'form-control'
+
+  .form-group
+    = f.label 'Pełna nazwa'
+    = f.text_field :full_name, class: 'form-control'
+
+  .form-group
+    = f.label 'Kod pocztowy'
+    = f.text_field :zip_code, class: 'form-control'
+
+  .form-group
+    = f.label 'Miejscowość'
+    = f.text_field :city, class: 'form-control'
+
+  .form-group
+    = f.label 'Ulica'
+    = f.text_field :street, class: 'form-control'
+
+  .form-group
+    = f.label 'Ulica (Nr lokalu)'
+    = f.text_field :street_address, class: 'form-control'
+
+  .form-group
+    = f.label 'NIP'
+    = f.text_field :nip, class: 'form-control'
+
+  .form-group
+    = f.label 'Regon'
+    = f.text_field :regon, class: 'form-control'
+
+  .action
+    = button_tag(type: 'submit', class: "btn btn-success btn-block", id: 'companyForm') do
+      %span.glyphicon.glyphicon-save 
+      Zapisz

@@ -37,6 +37,18 @@ module SessionsHelper
 	def current_user?(user)
 		user == current_user
 	end
+	
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:warning] = "Zaloguj się"
+        redirect_to login_url
+      end
+    end
+
+	def current_user_companies
+		@current_user_companies ||= current_user.companies.all.order(:id)	
+	end
 
 	def logged_in?
 		!current_user.nil?
@@ -50,5 +62,23 @@ module SessionsHelper
 	def store_location
 		session[:forwarding_url] = request.url if request.get?
 	end
+
+
+
+	def stored_location
+		session[:forwarding_url]
+	end
+
+	def nav_link(link_text, page)
+  		class_name = current_page?(page) ? 'active' : ''
+
+  		content_tag(:li, class: class_name) do
+    	link_to link_text, page
+  		end
+	end
+
+	def admin_only
+      redirect_back_or(current_user) unless current_user.admin?
+    end
 
 end

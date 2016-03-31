@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only:[:show, :edit, :update, :destroy, :new, :create, :index]
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
-  before_action :admin_only, only:[:index, :new, :create]
+  before_action :admin_only, only: [:index, :new, :create]
+  after_action :store_location, only: [:new, :show, :edit]
 
   # GET /users
   # GET /users.json
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    
   end
 
   # GET /users/new
@@ -31,11 +33,11 @@ class UsersController < ApplicationController
     #respond_to do |format|
       if @user.save
         @user.send_activation_email
-        flash.now[:info] = 'Użytkownik utworzony, oczekuje na potwierdzenie adresu email'
+        flash.now[:info] = 'Użytkownik utworzony, oczekuje na potwierdzenie adresu email.'
         render :new
        # format.json { render :show, status: :created, location: @user }
       else
-        flash.now[:info] = 'Wystąpił błąd, prosimy spróbować ponownie'
+        flash.now[:info] = 'Wystąpił błąd, prosimy spróbować ponownie.'
         render :new
        # format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -45,15 +47,17 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
+   # respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        flash[:success] = 'Dane użytkownika zostały poprawnie zapisane.'
+        redirect_to @user 
+     #   format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        flash.now[:info] = 'Wystąpił błąd, prosimy spróbować ponownie.'
+        render :edit
+      #  format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
+    #end
   end
 
   # DELETE /users/1
@@ -78,20 +82,9 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:warning] = "Zaloguj się"
-        redirect_to login_url
-      end
-    end
-
     def correct_user
       set_user
       redirect_back_or(current_user) unless (current_user?(@user) || current_user.admin?)
     end
 
-    def admin_only
-      redirect_back_or(current_user) unless current_user.admin?
-    end
 end

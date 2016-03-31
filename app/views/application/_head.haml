@@ -1,7 +1,0 @@
-- if logged_in?
-	.container-fluid
-		.navbar.navbar-default.navbar-fixed-top
-			.container
-				.navbar-right
-					= link_to current_user.name, current_user
-					= link_to "Wyloguj", logout_path, method: "delete", class: "btn btn-default navbar-btn"

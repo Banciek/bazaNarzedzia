@@ -1,0 +1,31 @@
+= form_for(@user) do |f|
+  - if @user.errors.any?
+    .alert.alert-danger
+      %strong
+        = pluralize(@user.errors.count, "error") 
+        prohibited this user from being saved:
+
+      %ul
+        - @user.errors.full_messages.each do |message| 
+          %li= message
+
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control" 
+  
+  .form-group
+    = f.label :email
+    = f.email_field :email, class: "form-control"
+  
+  .form-group
+    = f.label :password
+    = f.password_field :password, class: "form-control"
+  
+  .form-group
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, class: "form-control"
+  
+  .actions
+    = button_tag(type: 'submit', class: "btn btn-success btn-block", id: 'usersForm') do
+      %span.glyphicon.glyphicon-save 
+      Zapisz

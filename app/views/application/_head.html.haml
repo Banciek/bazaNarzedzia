@@ -1,0 +1,41 @@
+- if logged_in?
+	.container-fluid
+		.navbar.navbar-inverse.navbar-fixed-top
+			.container
+				.navbar-header
+
+					%button{type: "button", class: "navbar-toggle collapsed", "data-toggle": "collapse", "data-target": "#navbar-main", "aria-expanded": "false"}
+						%span.sr-only Toggle navigation
+						%span.icon-bar
+						%span.icon-bar
+						%span.icon-bar
+
+					%a.navbar-brand{href: '#'} Baza_app
+
+				.collapse.navbar-collapse#navbar-main
+					%ul.nav.navbar-nav.navbar-right
+						%li.dropdown
+							= link_to "#", class: "dropdown-toggle", 'data-toggle': "dropdown", role: "button", "aria-haspopup": "true", "aria-expanded": "false" do
+								%span.glyphicon.glyphicon-user
+								= current_user.name
+								%span.caret
+							%ul.dropdown-menu.animated.fadeInDown
+								%li= link_to 'Profil', current_user
+								%li.divider
+								%li
+									= link_to logout_path, method: "delete", class: "logout" do
+										%span.glyphicon.glyphicon-off
+										Wyloguj
+					- unless current_user.admin?
+						.navbar-left
+							%p.navbar-text.hidden-xs
+								Firmy:
+
+							%ul.nav.navbar-nav.nav-tabs
+								- current_user_companies.each do |company|
+									= nav_link company.name, company_path(company)
+								= link_to new_company_path,  class: "navbar-text navbar-link" do
+									%span.glyphicon.glyphicon-plus{'data-toggle': "tooltip", 'data-placement': "right", title: "dodaj firmę."}
+							
+
+

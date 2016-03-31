@@ -1,0 +1,47 @@
+.row 
+	.col-md-4.col-md-offset-4
+		%h1
+			= @user.name
+			%small Dane użytkownika.
+		-#.jumbotron
+		- if current_user.admin?
+			%p
+				%strong Id:
+				%span.badge= @user.id
+			%p
+				%strong Aktywowany?:
+				= @user.activated
+
+			%p
+				%strong Aktywowany:
+				= @user.activated_at
+
+			%p
+				%strong Admin?:
+				= @user.admin
+
+		.well.well-sm
+			%h4.text-center 
+				%strong Email:
+				= @user.email
+
+		%table.table.table-hover
+			%thead
+				%tr
+					%th 
+						Firmy:
+						%span.badge= current_user_companies.length
+			%tbody.table-hover
+				- current_user_companies.each do |company|
+					%tr
+						%td= link_to company.name, company_path(company)
+						
+
+		.btn-group.btn-group-justified#shows
+			= link_to stored_location, class: "btn btn-default" do
+				%span.glyphicon.glyphicon-chevron-left
+				Powrót
+			= link_to edit_user_path(@user), class: "btn btn-default" do
+				%span.glyphicon.glyphicon-pencil
+				Edytuj
+					

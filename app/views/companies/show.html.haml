@@ -1,0 +1,63 @@
+.row 
+  .col-md-6.col-md-offset-3
+    %h1
+      = @company.name
+      %small Dane firmy.
+    
+    %table.table.table-hover#company-table
+      %thead
+        %tr
+          %td
+            %strong Nazwa:
+          %td= @company.name
+
+      %tbody
+        %tr
+          %td
+            %strong Pełna nazwa:
+          %td= @company.full_name
+
+
+        %tr
+          %td
+            %strong Kod pocztowy:
+          %td= @company.zip_code
+
+
+        %tr
+          %td
+            %strong Miejscowość:
+          %td= @company.city 
+
+
+        %tr
+          %td
+            %strong Ulica:
+          %td= @company.street 
+
+
+        %tr
+          %td
+            %strong Ulica (Nr lokalu):
+          %td= @company.street_address 
+
+
+        %tr
+          %td
+            %strong NIP:
+          %td= @company.nip 
+
+
+        %tr
+          %td
+            %strong Regon:
+          %td= @company.regon
+
+    .btn-group.btn-group-justified#shows
+      = link_to stored_location, class: "btn btn-default" do
+        %span.glyphicon.glyphicon-chevron-left
+        Powrót
+      = link_to edit_company_path(@company), class: "btn btn-default" do
+        %span.glyphicon.glyphicon-pencil
+        Edytuj
+

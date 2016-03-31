@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
   		  log_in(user)
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         flash[:success] = "Zalogowano poprawnie"
-  		  redirect_back_or user
+        current_user.admin? ? redirect_back_or(current_user) : redirect_back_or(current_user_companies.first)	  
       else
         flash[:warning] = "Konto nie aktywowane. Link aktywacyjny powinien znajować się w twojej skrzynce email."
         redirect_to root_url
@@ -27,6 +27,11 @@ class SessionsController < ApplicationController
   	log_out if logged_in?
   	redirect_to root_path
   	flash[:info] = 'Wylogowano poprawnie.'
+  end
+
+  #store_location version for ajax
+  def update
+    session[:forwarding_url] = request.url
   end
 
   private
