@@ -1,0 +1,40 @@
+.edit-pages  
+  %h1
+    = @employee.first_name
+    = @employee.last_name 
+    %small Edytuj dane pracownika.
+  	
+  .col-md-4.col-md-offset-4
+    = form_for @employee do |f|
+      - if @employee.errors.any?
+        .alert.alert-danger
+          %strong 
+            = pluralize(@employee.errors.count, "error") 
+            prohibited this employee from being saved:
+
+          %ul
+            - @employee.errors.full_messages.each do |message| 
+              %li= message
+
+      .form-group
+        = f.label "Imię:"
+        = f.text_field :first_name, class: 'form-control', id: 'autofocus'
+      .form-group
+        = f.label "Nazwisko:"
+        = f.text_field :last_name, class: 'form-control'
+      .form-group
+        = f.label "Stanowisko:"
+        = f.text_field :work_as, class: 'form-control'
+      .form-group
+        = f.label "Data zatrudnienia:"
+        = f.date_field :date_of_employment, class: 'form-control'
+
+      .action
+        = button_tag(type: 'submit', class: "btn btn-success btn-block", id: 'companyForm') do
+          %span.glyphicon.glyphicon-save 
+          Zapisz
+
+    = link_to company_pulpit_path(@employee.company), class: "btn btn-default btn-block" do
+      %span.glyphicon.glyphicon-chevron-left
+      Powrót
+

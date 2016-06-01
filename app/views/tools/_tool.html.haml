@@ -1,0 +1,11 @@
+%li{id: "#{tool.id}", class: "grey"}
+	.row
+		.col-sm-6.employee-data
+			= tool.name+'; '
+			ilość: 
+			= tool.quantity
+		.col-sm-6.tool-menu
+			= link_to edit_tool_path(tool) do
+				%span.glyphicon.glyphicon-edit{'data-toggle': "tooltip", 'data-placement': "right", title: "edytuj"}
+			= link_to tool, remote: true, :method => :delete, :data => { :confirm => "Czy napewno chcesz usunąć narzędzie #{tool.name}?"  } do
+				%span.glyphicon.glyphicon-remove-circle{'data-toggle': "tooltip", 'data-placement': "right", title: "usuń"}

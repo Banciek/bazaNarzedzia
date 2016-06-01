@@ -1,0 +1,95 @@
+.edit-pages.row
+	.col-md-5
+
+		%h3 Właściciel karty:
+		%h4
+			= @employee.first_name
+			= @employee.last_name
+		%p= "Kartę utworzono: #{@tools_card.created_at.to_s(:long)}"
+		%br
+		%h3 
+			Dane firmy:
+			= @company.name
+
+		%table.table.table-condensed
+			%tr
+				%td
+					%strong Pełna nazwa:
+				%td= @company.full_name
+
+
+			%tr
+				%td
+					%strong Kod pocztowy:
+				%td= @company.zip_code
+
+
+			%tr
+				%td
+					%strong Miejscowość:
+				%td= @company.city 
+
+
+			%tr
+				%td
+					%strong Ulica:
+				%td= @company.street 
+
+
+			%tr
+				%td
+					%strong Nr.domu/Nr.lokalu:
+				%td= @company.street_address 
+
+
+			%tr
+				%td
+					%strong NIP:
+				%td= @company.nip 
+
+
+			%tr
+				%td
+					%strong Regon:
+				%td= @company.regon
+
+		%h3 Przypisane narzędzia:
+		- if !@tools.blank?
+			%table.table.table-condensed
+				%tr
+					%th #
+					%th nazwa
+					%th ilość
+					%th nr. ew.
+					%th 
+					%th
+				- @tools.each.with_index(1) do |tool, index|
+					%tr.tool{'data-tool-id': tool.id, 'data-card-id': tool.tools_card_id , 'class': "#{'assigned' if !tool.employee_id.nil?}" }
+						%td= index
+						%td= tool.name
+						%td= tool.quantity
+						%td= tool.id
+						%td
+							- if !tool.employee_id.nil?
+								= link_to @tools_card, class: 'pick-on-show' do
+									%span.glyphicon.glyphicon-paperclip{'data-toggle': "tooltip", 'data-placement': "top", title: "Dołączone do karty.  Kliknij aby odłączyć."}
+						%td
+							= link_to edit_tool_path(tool) do
+								%span.glyphicon.glyphicon-edit{'data-toggle': "tooltip", 'data-placement': "right", title: "edytuj"}
+							-# link_to tool, remote: true, :method => :delete, :data => { :confirm => "Czy napewno chcesz usunąć narzędzie #{tool.name}?"  } do
+								%span.glyphicon.glyphicon-remove-circle{'data-toggle': "tooltip", 'data-placement': "right", title: "usuń"}
+
+		- else
+			%strong brak przypisanych narzędzi
+
+		%h3 Treść dokumentu:
+		%textarea.form-control{rows: 7} 
+			= render 'pdf_content_message'
+
+		= link_to 'Edit', edit_tools_card_path(@tools_card)
+		\|
+		= link_to 'Back', tools_cards_path
+
+
+	.col-md-offset-1.col-md-6
+		-#%iframe.pdf-preview{src: "http://localhost:3000/tools_cards/#{@tools_card.id}.pdf"}

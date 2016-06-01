@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  resources :tools_cards
+  resources :tools 
+
+  #ajax routes:
+  put 'tool_assign' => 'tools#assign'
+  put 'tool_withdraw' => 'tools#withdraw'
+  put 'tool_pick' => 'tools#pick'
+  put 'tool_pick_on_show' => 'tools_cards#pick_on_show'
+
   get 'password_ressets/new'
 
   get 'password_ressets/edit'
@@ -11,7 +20,10 @@ Rails.application.routes.draw do
 
 
   resources :users 
-  resources :companies 
+  resources :companies do
+    get 'pulpit'
+  end
+  resources :employees
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :edit, :create, :update]
   # The priority is based upon order of creation: first created -> highest priority.

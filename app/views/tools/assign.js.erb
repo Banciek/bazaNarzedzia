@@ -1,0 +1,3 @@
+$('#employees-part').html("<%= j (render 'companies/employees_part_pulpit') %>");
+$("<div><%= @message %></div>").addClass("alert alert-success").attr('id','flash').appendTo('body')
+	.slideDown('slow').delay(2500).slideUp('slow');

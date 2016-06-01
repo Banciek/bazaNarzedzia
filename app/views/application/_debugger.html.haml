@@ -1,0 +1,14 @@
+.panel.panel-danger#debugger
+	.panel-heading
+		%h3.panel-title 
+			Debugger
+			%small tego nie bedzie
+	.panel-body
+		#jeden
+			id firm: 
+			= session[:companies_ids]
+			= session[:company_id]
+			= session[:last_company]
+		#dwa
+			id expanded:
+			= @test

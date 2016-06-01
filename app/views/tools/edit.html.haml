@@ -1,0 +1,35 @@
+.edit-pages
+	%h1
+		= @tool.name
+		%small Edytuj dane narzędzia.
+		
+	.col-md-4.col-md-offset-4
+		= form_for @tool do |f|
+			- if @tool.errors.any?
+				.alert.alert-danger
+					%strong 
+						= pluralize(@tool.errors.count, "error") 
+						prohibited this tool from being saved:
+
+					%ul
+						- @tool.errors.full_messages.each do |message| 
+							%li= message
+
+			.form-group
+				= f.label 'Nazwa:'
+				= f.text_field :name, class: 'form-control', id: 'autofocus'
+			.form-group
+				= f.label 'Ilość:'
+				= f.number_field :quantity, 'value': "#{@tool.quantity.blank? ? 1 : @tool.quantity }", class: 'form-control'
+			.form-group
+				= f.label 'Przypisz pracownikowi:'
+				= f.select :employee_id, Employee.where(company_id: session[:company_id]).all.collect { |p| [ "#{p.first_name} #{p.last_name}", p.id ] }, {include_blank: true}, class: 'form-control'
+
+			.action
+				= button_tag(type: 'submit', class: "btn btn-success btn-block", id: 'toolForm') do
+					%span.glyphicon.glyphicon-save 
+					Zapisz
+
+		= link_to stored_location, class: "btn btn-default btn-block" do
+			%span.glyphicon.glyphicon-chevron-left
+			Powrót

@@ -1,0 +1,14 @@
+var numOfTools = parseInt($("#tools-part .badge").html(),10)
+numOfTools++;
+
+
+$("#employee-modal").modal("hide");
+$("<div>Dodano narzędzie!</div>").addClass("alert alert-success").attr('id','flash').appendTo('body')
+	.slideDown('slow').delay(2500).slideUp('slow');
+$("#tools-part .badge").html(numOfTools);
+$('#tools-part').html("<%= j (render 'companies/tools_part_pulpit') %>");
+$('#employees-part').html("<%= j (render 'companies/employees_part_pulpit') %>");
+
+
+	
+ 

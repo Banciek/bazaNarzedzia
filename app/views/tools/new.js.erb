@@ -1,0 +1,5 @@
+$("#employee-modal").html("<%= j (render 'new')%>");
+$("#employee-modal").modal("show");
+$('#employee-modal').on('shown.bs.modal', function() {
+  $('#autofocus').focus();
+});

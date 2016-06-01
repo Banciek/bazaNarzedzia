@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @tool.name
+%p
+  %b Quantity:
+  = @tool.quantity
+%p
+  %b Has card:
+  = @tool.has_card
+
+= link_to 'Edit', edit_tool_path(@tool)
+\|
+= link_to 'Back', tools_path

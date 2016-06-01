@@ -25,20 +25,20 @@
 				%strong Email:
 				= @user.email
 
-		%table.table.table-hover
+		%table.table.table-hover.edit-pages
 			%thead
 				%tr
 					%th 
 						Firmy:
-						%span.badge= current_user_companies.length
+						%span.badge= @user.companies.length
 			%tbody.table-hover
-				- current_user_companies.each do |company|
+				- @user.companies.sort.each do |company|
 					%tr
 						%td= link_to company.name, company_path(company)
 						
 
 		.btn-group.btn-group-justified#shows
-			= link_to stored_location, class: "btn btn-default" do
+			= link_to stored_pulpit, class: "btn btn-default" do
 				%span.glyphicon.glyphicon-chevron-left
 				Powrót
 			= link_to edit_user_path(@user), class: "btn btn-default" do

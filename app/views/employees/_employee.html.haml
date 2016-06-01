@@ -1,0 +1,13 @@
+%li{id: "#{employee.id}"}
+	.row
+		.col-sm-6.employee-data
+			= employee.first_name
+			= employee.last_name
+		.col-sm-6.employee-menu
+			%span{'data-toggle': "tooltip", 'data-placement': "top", title: "rozwiń"}
+				%a.btn.btn-default.btn-xs#show-details{'role': "button", 'data-toggle': "collapse tooltip",  'href': "#collapse-#{employee.id}", 'aria-expanded': "false", 'aria-controls': "collapseExample"} 
+					%span.caret
+			= link_to edit_employee_path(employee) do
+				%span.glyphicon.glyphicon-edit{'data-toggle': "tooltip", 'data-placement': "right", title: "edytuj."}
+			= link_to employee, remote: true, :method => :delete, :data => { :confirm => "Czy napewno chcesz usunąć pracownika #{employee.first_name} #{employee.last_name}?"  } do
+				%span.glyphicon.glyphicon-remove-circle{'data-toggle': "tooltip", 'data-placement': "right", title: "usuń."}

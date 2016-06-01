@@ -15,4 +15,6 @@
 //= require bootstrap
 //= require turbolinks
 //= require js.cookie
+//= require jquery-ui/draggable
+//= require jquery-ui/droppable
 //= require_tree .

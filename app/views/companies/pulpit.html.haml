@@ -1,0 +1,17 @@
+%h2.text-center 
+	%small Beta pulpit firmy:
+	= @company.name
+.row#pulpit
+	=# render 'debugger'
+	.container-fluid
+		.col-sm-6#employees-part
+			= render 'employees_part_pulpit'
+		
+		.col-sm-5.col-sm-offset-1#tools-part
+			= render 'tools_part_pulpit'
+
+			
+						
+
+
+.modal.fade#employee-modal

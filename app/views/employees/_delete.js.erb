@@ -1,0 +1,8 @@
+var numOfEmployees = parseInt($("#employees-part .badge").html(),10)
+numOfEmployees--;
+
+$("li#<%= @employee.id %>").fadeOut("slow");
+$("<div>Poprawnie usunięto pracownika</div>").addClass("alert alert-success").attr('id','flash').appendTo('body')
+	.slideDown('slow').delay(2500).slideUp('slow');
+$("#employees-part .badge").html(numOfEmployees);
+$('#tools-part').html("<%= j (render 'companies/tools_part_pulpit') %>");

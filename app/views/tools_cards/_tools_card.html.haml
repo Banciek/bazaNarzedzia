@@ -1,0 +1,4 @@
+.card.col-xs-3{'data-card-id': @tools_card.id}
+	= link_to @tools_card, remote: true, method: :delete, data: { confirm: "Czy napewno chcesz usunąć kartę?" } do
+		%span.glyphicon.glyphicon-remove{'data-toggle': "tooltip", 'data-placement': "right", title: "usuń"}
+	= @tools_card.created_at.to_s(:long)

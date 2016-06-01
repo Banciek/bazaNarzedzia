@@ -1,0 +1,6 @@
+
+$("<div>Poprawnie usunięto narzędzie</div>").addClass("alert alert-success").attr('id','flash').appendTo('body')
+	.slideDown('slow').delay(2500).slideUp('slow');
+
+$('#tools-part').html("<%= j (render 'companies/tools_part_pulpit') %>");
+$('#employees-part').html("<%= j (render 'companies/employees_part_pulpit') %>");

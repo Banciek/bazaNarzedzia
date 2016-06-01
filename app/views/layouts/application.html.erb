@@ -9,11 +9,7 @@
 </head>
 <body>
 	<%= render 'head' %>
-		<% flash.each do |message_type, message| %>
-		<div class= "row">
-			<div class="alert alert-<%= message_type %>" id="flash"><%= message %> </div>
-		</div>
-		<% end %>
+	<%= render 'flash' %>
 <div class="container-fluid">
 
 <%= yield %>
@@ -22,7 +18,7 @@
 <% unless cookies[:cookies_ok] %>
 <div class= "container-fluid">
 	<div class= "alert alert-info col-sm-10 col-sm-offset-1" id= "accept_cookies">
-		<p>W celu jak najlepszych doznań w trakcie pracy z aplikacją, korzystamy z plików cookies. Jeżeli zgadzasz się z tym, akceptuj.</p> 
+		<p>W celu uzyskania jak najlepszej funkconalności aplikacji, korzystamy z plików cookies. Jeżeli zgadzasz się z tym, akceptuj.</p> 
 		<button type="button" class="btn btn-success" id="accept_cookies_button">Akceptuję</button>
 	</div>
 </div>

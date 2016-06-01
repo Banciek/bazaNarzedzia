@@ -10,7 +10,9 @@
 						%span.icon-bar
 						%span.icon-bar
 
-					%a.navbar-brand{href: '#'} Baza_app
+					%a.navbar-brand{href: '#'} 
+						%small beta
+						Narzędzia
 
 				.collapse.navbar-collapse#navbar-main
 					%ul.nav.navbar-nav.navbar-right
@@ -32,8 +34,8 @@
 								Firmy:
 
 							%ul.nav.navbar-nav.nav-tabs
-								- current_user_companies.each do |company|
-									= nav_link company.name, company_path(company)
+								- current_user_companies.sort.each do |company|
+									= nav_link company.name, company_pulpit_path(company)
 								= link_to new_company_path,  class: "navbar-text navbar-link" do
 									%span.glyphicon.glyphicon-plus{'data-toggle': "tooltip", 'data-placement': "right", title: "dodaj firmę."}
 							

@@ -1,0 +1,21 @@
+%h1 Listing tools_cards
+
+%table
+  %thead
+    %tr
+      %th Employee
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tools_cards.each do |tools_card|
+      %tr
+        %td= tools_card.employee_id
+        %td= link_to 'Show', tools_card
+        %td= link_to 'Edit', edit_tools_card_path(tools_card)
+        %td= link_to 'Destroy', tools_card, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Tools card', new_tools_card_path

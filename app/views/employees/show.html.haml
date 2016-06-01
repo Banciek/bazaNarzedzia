@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Company:
+  = @employee.company_id
+%p
+  %b First name:
+  = @employee.first_name
+%p
+  %b Last name:
+  = @employee.last_name
+%p
+  %b Work as:
+  = @employee.work_as
+%p
+  %b Date of employment:
+  = @employee.date_of_employment
+
+= link_to 'Edit', edit_employee_path(@employee)
+\|
+= link_to 'Back', employees_path

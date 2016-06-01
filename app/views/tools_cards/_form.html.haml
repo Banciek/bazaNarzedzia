@@ -1,0 +1,8 @@
+= form_for @tools_card, remote: true do |f|
+
+  .field
+    = f.label :employee_id
+    = f.text_field :employee_id
+  .actions
+    = f.submit 'Save', id: 'make_new_tools_card'
+

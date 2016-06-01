@@ -1,0 +1,29 @@
+%h1 Listing employees
+
+%table
+  %thead
+    %tr
+      %th Company
+      %th First name
+      %th Last name
+      %th Work as
+      %th Date of employment
+      %th
+      %th
+      %th
+
+  %tbody
+    - @employees.each do |employee|
+      %tr
+        %td= employee.company_id
+        %td= employee.first_name
+        %td= employee.last_name
+        %td= employee.work_as
+        %td= employee.date_of_employment
+        %td= link_to 'Show', employee
+        %td= link_to 'Edit', edit_employee_path(employee)
+        %td= link_to 'Destroy', employee, :method => :delete, :data => { :confirm => "Czy napewno chcesz usunąć pracownika #{employee.first_name} #{employee.last_name}?"  }
+
+%br
+
+= link_to 'New Employee', new_employee_path

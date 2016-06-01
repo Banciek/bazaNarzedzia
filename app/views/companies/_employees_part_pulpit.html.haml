@@ -1,0 +1,91 @@
+#employees-list-title 
+	Lista pracowników:
+	%span.badge= @employees.length
+	.row
+		.col-sm-6
+			.row
+				.col-xs-2#new-employee{'data-toggle': "tooltip", 'data-placement': "top", title: "dodaj pracownika"}
+					= link_to new_employee_path, remote: true do
+						nowy
+		.col-sm-offset-1.col-sm-5
+			.row
+				.col-xs-6
+					%a#expand{'href': '#'} rozwiń
+					|
+					%a#fold{'href': '#'} zwiń
+
+
+%ul#employees-list
+	- @employees.each do |employee|
+		%li{id: "#{employee.id}"}
+			.row#employee-head
+				.col-sm-6.employee-data	
+					= employee.first_name
+					%strong= employee.last_name
+				.employee-menu
+					.col-sm-3
+						%span.rozwin{'data-toggle': "tooltip", 'data-placement': "top", title: "rozwiń"}
+							%a.btn.btn-link#show-details{'role': "button", 'data-toggle': "collapse",  'href': "#collapse-#{employee.id}", 'aria-expanded': "false", 'aria-controls': "collapseEmployee"} 
+								%span.glyphicon.glyphicon-menu-down
+					.col-sm-2
+						= link_to edit_employee_path(employee) do
+							%span.glyphicon.glyphicon-edit{'data-toggle': "tooltip", 'data-placement': "top", title: "edytuj"}
+						= link_to employee, remote: true, :method => :delete, :data => { :confirm => "Czy napewno chcesz usunąć pracownika #{employee.first_name} #{employee.last_name}?"  } do
+							%span.glyphicon.glyphicon-remove-circle{'data-toggle': "tooltip", 'data-placement': "right", title: "usuń"}
+			.collapse.expandable{id: "collapse-#{employee.id}", 'data-collapse-id': employee.id, class: "#{expanded(employee.id)}"}
+				.row
+					.col-sm-4.col-xs-12
+						.col-xs-12#cards 
+							Karty:
+							= link_to new_tools_card_path(employee_id: employee.id), remote: true do
+								%span.glyphicon.glyphicon-plus{'data-employee-id': employee.id,'data-toggle': "tooltip", 'data-placement': "top", title: "dodaj kartę."}
+						- if !employee.tools_cards.empty?
+							- employee.tools_cards.each do |card|
+								.card.col-xs-6.col-lg-5{'data-card-id': card.id}
+									.text-right
+										= link_to card, remote: true, method: :delete, data: { confirm: "Czy napewno chcesz usunąć kartę?" } do
+											%span.glyphicon.glyphicon-remove{'data-toggle': "tooltip", 'data-placement': "right", title: "usuń"}
+									%p= card.created_at.to_s(:long)
+									- i = 0
+									- @tools.each do |tool|
+										- i += 1 if tool.tools_card_id == card.id
+									%span.badge.toolInCard= i
+
+						- else
+							.col-xs-3
+								%strong brak
+						
+					.col-sm-8#employee-tool
+						Przydzielone narzędzia:
+						- ownTools = []
+						- @tools.each do |tool|
+							- ownTools.push(tool) if tool.employee_id == employee.id
+						- if !ownTools.empty?
+							- i = 0
+							- ownTools.each do |t|
+								- i += 1 if !t.tools_card_id.nil?
+							="(#{i}/#{ownTools.length})" 
+							%table.table.table-condensed
+								%tr
+									%th #
+									%th nazwa
+									%th ilość
+									%th
+									%th
+								- ownTools.each.with_index(1) do |tool, index|
+									%tr.tool{'data-tool-id': tool.id, 'data-card-id': tool.tools_card_id}
+										%td= index
+										%td= tool.name
+										%td= tool.quantity
+										%td
+											- if !tool.tools_card_id.nil? 
+												= link_to '#', class: 'pick' do
+													%span.glyphicon.glyphicon-paperclip{'data-toggle': "tooltip", 'data-placement': "top", title: "Dołączone do karty.  Kliknij aby odłączyć."}
+										%td
+											= link_to edit_tool_path(tool) do
+												%span.glyphicon.glyphicon-edit{'data-toggle': "tooltip", 'data-placement': "right", title: "edytuj"}
+											= link_to '#', class: 'withdraw' do
+												%span.glyphicon.glyphicon-share{'data-toggle': "tooltip", 'data-placement': "right", title: "odepnij od pracownika"}
+						- else
+							%strong brak 
+						

@@ -1,0 +1,36 @@
+#tools-list-title
+	Lista narzędzi:
+	- i = 0
+	- if !@tools.empty?
+		- @tools.each do |t|
+			- i += 1 if !t.employee_id.nil?
+	%span.badge= "#{i}/#{@tools.length}"
+	= link_to new_tool_path, remote: true do
+		#new-tool{'data-toggle': "tooltip", 'data-placement': "top", title: "dodaj narzędzie"} nowe
+- if !@tools.empty?
+	.row
+		.col-sm-11.col-sm-offset-1
+			%table.table.table-condensed
+				%tr
+					%th #
+					%th nazwa
+					%th ilość
+					%th nr. ew.
+					%th 
+				- @tools.each.with_index(1) do |tool, index|
+					%tr.tool{'data-tool-id': tool.id, 'data-card-id': tool.tools_card_id , 'class': "#{'assigned' if !tool.employee_id.nil?}" }
+						%td= index
+						%td= tool.name
+						%td= tool.quantity
+						%td= tool.id
+						%td
+							- if !tool.employee_id.nil?
+								= link_to '#', class: 'withdraw' do 
+									%span.glyphicon.glyphicon-pushpin{'data-toggle': "tooltip", 'data-placement': "top", title: "Przypięte do: #{tools_employee(tool)}. Kliknij aby odpiąć."}
+						%td
+							= link_to edit_tool_path(tool) do
+								%span.glyphicon.glyphicon-edit{'data-toggle': "tooltip", 'data-placement': "right", title: "edytuj"}
+							= link_to tool, remote: true, :method => :delete, :data => { :confirm => "Czy napewno chcesz usunąć narzędzie #{tool.name}?"  } do
+								%span.glyphicon.glyphicon-remove-circle{'data-toggle': "tooltip", 'data-placement': "right", title: "usuń"}
+- else
+	%strong brak 

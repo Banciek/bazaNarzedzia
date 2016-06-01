@@ -1,0 +1,13 @@
+var numOfEmployees = parseInt($("#employees-part .badge").html(),10)
+numOfEmployees++;
+
+
+$("#employee-modal").modal("hide");
+$('#employees-part').html("<%= j (render 'companies/employees_part_pulpit') %>");
+$("<div>Dodano pracownika!</div>").addClass("alert alert-success").attr('id','flash').appendTo('body')
+	.slideDown('slow').delay(2500).slideUp('slow');
+$("#employees-part .badge").html(numOfEmployees);
+
+
+	
+ 

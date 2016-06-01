@@ -2,6 +2,7 @@ module SessionsHelper
 
 	def log_in(user)
 		session[:user_id] = user.id
+		session[:companies_ids] = user.companies.pluck(:id)
 	end
 
 	def remember(user)
@@ -19,6 +20,8 @@ module SessionsHelper
 	def log_out
 		forget(current_user)
 		session.delete(:user_id)
+		session.delete(:companies_id)
+		session.delete(:companies_ids)
 		@current_user = nil
 	end
 
@@ -47,7 +50,7 @@ module SessionsHelper
     end
 
 	def current_user_companies
-		@current_user_companies ||= current_user.companies.all.order(:id)	
+		@current_user_companies ||= @current_user.companies
 	end
 
 	def logged_in?
@@ -79,6 +82,14 @@ module SessionsHelper
 
 	def admin_only
       redirect_back_or(current_user) unless current_user.admin?
+    end
+
+    def working_pulpit
+      session[:last_company] = request.url if request.get?
+    end
+
+    def stored_pulpit
+    	session[:last_company]
     end
 
 end
