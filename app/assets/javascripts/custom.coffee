@@ -3,7 +3,7 @@ flash = ->
 	$('#flash').slideDown('slow')
 	setTimeout ( ->
 		$('#flash').slideUp('slow') 
-	), 3500
+	), 2500
 
 #function to serialize arrays for cookies
 cookiefy = (array) ->
@@ -220,6 +220,6 @@ $(document).on "ready, page:change, page:update", ->
 			card_id = $(this).attr("data-card-id")
 			window.location.href = '/tools_cards/'+card_id
 
-$(document).on "page:change, page:update", ->
-	flash
+$(document).on "ready", ->
+	flash()
 
