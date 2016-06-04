@@ -29,6 +29,6 @@ module BazaNarzedzia
     }
 
     # Host for mailer
-    config.action_mailer.default_url_options = { host: 'carbudapp.com' }
+    config.action_mailer.default_url_options = { host: 'www.carbudapp.com' }
   end
 end
