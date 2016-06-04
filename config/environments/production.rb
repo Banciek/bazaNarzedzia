@@ -78,9 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Mailer config
-  
-# Defaults to:
- config.action_mailer.sendmail_settings = {
+  config.action_mailer.sendmail_settings = {
    location: '/usr/sbin/sendmail',
    arguments: '-i -t'
   }
