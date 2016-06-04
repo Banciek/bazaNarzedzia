@@ -136,8 +136,12 @@ class ToolsController < ApplicationController
     end
 
     def users_tool?
-      session[:companies_ids].each do |id|
-        return true if id == @tool.company_id
+      if !session[:companies_ids].is_a? Numeric
+        session[:companies_ids].each do |id|
+          return true if id == @tool.company_id
+        end
+      else
+        return true if session[:companies_ids] == @tool.company_id
       end
       return false
     end

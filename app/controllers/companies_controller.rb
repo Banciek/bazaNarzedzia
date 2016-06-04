@@ -46,7 +46,13 @@ class CompaniesController < ApplicationController
       if @company.save
         user_company = current_user.manages.build(company: @company) unless current_user.admin?
         if user_company.save
-          session[:companies_ids].push(user_company.company_id) 
+          if session[:companies_ids].is_a? Numeric
+            num = session[:companies_ids]
+            session.delete(:companies_ids)
+            session[:companies_ids] = [num, user_company.company_id]
+          else
+            session[:companies_ids].blank? ? session[:companies_ids] = user_company.company_id : session[:companies_ids].push(user_company.company_id) 
+          end
           flash[:success] = "Utworzono firmę."
           redirect_to @company
         end
@@ -76,7 +82,11 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1
   # DELETE /companies/1.json
   def destroy
-    session[:companies_ids].delete(@company.id)
+    if session[:companies_ids].is_a? Numeric 
+      session.delete(:companies_ids)
+    else
+      session[:companies_ids].delete(@company.id) if !session[:companies_ids].blank?
+    end
     @company.destroy
 #    respond_to do |format|
     flash[:info] = "Firma wraz z pracownikami została poprawnie usunięta."

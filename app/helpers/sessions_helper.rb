@@ -2,7 +2,7 @@ module SessionsHelper
 
 	def log_in(user)
 		session[:user_id] = user.id
-		session[:companies_ids] = user.companies.pluck(:id)
+		session[:companies_ids] = user.companies.pluck(:id) if !user.companies.blank?
 	end
 
 	def remember(user)
