@@ -27,5 +27,8 @@ module BazaNarzedzia
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
         "<div class=\"has-error\">#{html_tag}</div>".html_safe
     }
+
+    # Host for mailer
+    config.action_mailer.default_url_options = { host: 'carbudapp.com' }
   end
 end
