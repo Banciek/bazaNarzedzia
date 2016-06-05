@@ -1,4 +1,6 @@
 class ToolsCard < ActiveRecord::Base
+	#attr_accessor :content
+
   belongs_to :employee
   has_many :tools
   belongs_to :company

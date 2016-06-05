@@ -41,7 +41,7 @@
 								%span.glyphicon.glyphicon-plus{'data-employee-id': employee.id,'data-toggle': "tooltip", 'data-placement': "top", title: "dodaj kartę."}
 						- if !employee.tools_cards.empty?
 							- employee.tools_cards.each do |card|
-								.card.col-xs-6.col-lg-5{'data-card-id': card.id}
+								.card.col-xs-6.col-sm-12.col-lg-5{'data-card-id': card.id}
 									.text-right
 										= link_to card, remote: true, method: :delete, data: { confirm: "Czy napewno chcesz usunąć kartę?" } do
 											%span.glyphicon.glyphicon-remove{'data-toggle': "tooltip", 'data-placement': "right", title: "usuń"}

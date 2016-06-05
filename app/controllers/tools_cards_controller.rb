@@ -14,11 +14,25 @@ class ToolsCardsController < ApplicationController
   # GET /tools_cards/1
   # GET /tools_cards/1.json
   def show
-    store_location
+    
     @employee = @tools_card.employee
-    @company = @tools_card.company
-
+    
+    current_user_companies.each do |company|
+      @company = company if company.id == @tools_card.company_id  
+    end
+    
     @tools = @tools_card.tools
+    # @tools_card.content = File.read Rails.root.join('app', 'views', 'tools_cards', '_pdf_content_message.html.haml')
+
+    respond_to do |format|
+      format.html {
+        @tools_card.content = view_context.render 'pdf_content_message' if @tools_card.content.blank?
+      }
+      format.pdf do 
+        pdf = ToolsCardsPdf.new(@tools_card, @employee, @company, @tools)
+        send_data pdf.render, filename: "KN-#{@employee.first_name}#{@employee.last_name}-#{@tools_card.id}.pdf", type: 'application/pdf', disposition: "inline"
+      end
+    end
 
   end
 
@@ -54,9 +68,13 @@ class ToolsCardsController < ApplicationController
   # PATCH/PUT /tools_cards/1
   # PATCH/PUT /tools_cards/1.json
   def update
+    params[:content] = nil if params[:content].blank?
     respond_to do |format|
       if @tools_card.update(tools_card_params)
-        format.html { redirect_to @tools_card, notice: 'Tools card was successfully updated.' }
+        format.html { 
+          redirect_to @tools_card
+          flash[:success] = 'Zaktualizowano poprawnie.' 
+        }
         format.json { render :show, status: :ok, location: @tools_card }
       else
         format.html { render :edit }
@@ -98,7 +116,7 @@ class ToolsCardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tools_card_params
-      params.require(:tools_card).permit(:employee_id)
+      params.require(:tools_card).permit(:employee_id, :content)
     end
 
     def users_card?
@@ -112,6 +130,5 @@ class ToolsCardsController < ApplicationController
     def correct_user?
       redirect_back_or(current_user) unless (users_card? || current_user.admin?)
     end
-
 
 end

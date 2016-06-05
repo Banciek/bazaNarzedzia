@@ -12,6 +12,7 @@ gem 'haml'
 gem 'haml-rails'
 # Prawn for generating pdfs
 gem 'prawn'
+gem 'prawn-table'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

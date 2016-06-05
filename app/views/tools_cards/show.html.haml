@@ -82,14 +82,17 @@
 		- else
 			%strong brak przypisanych narzędzi
 
-		%h3 Treść dokumentu:
-		%textarea.form-control{rows: 7} 
-			= render 'pdf_content_message'
+		= form_for(@tools_card) do |f|
+			.form-group
+				%h3= f.label 'Treść dokumentu:', style: "font-weight: normal"
+				= f.text_area :content, class: 'form-control', rows: '6'
+			.actions
+				= button_tag(type: 'submit', class: "btn btn-danger btn-block", id: 'addContentToToolsCard') do
+					Aktualizuj PDF
+					%span.glyphicon.glyphicon-paste 
+					
 
-		= link_to 'Edit', edit_tools_card_path(@tools_card)
-		\|
-		= link_to 'Back', tools_cards_path
 
 
 	.col-md-offset-1.col-md-6
-		-#%iframe.pdf-preview{src: "http://localhost:3000/tools_cards/#{@tools_card.id}.pdf"}
+		%iframe.pdf-preview{src: "http://localhost:3000/tools_cards/#{@tools_card.id}.pdf", frameborder: 0}
