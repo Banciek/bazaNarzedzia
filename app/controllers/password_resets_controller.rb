@@ -25,7 +25,8 @@ class PasswordResetsController < ApplicationController
       @user.errors.add(:password, "can't be empty")
       render 'edit'
     elsif @user && @user.authenticated?(:reset, params[:id]) && !@user.password_reset_expired?
-      @user.update_attributes(user_params, reset_digest: nil)
+      @user.update_attributes(user_params)
+      @user.update_attributes(reset_digest: nil)
       #log_in @user
       flash[:success] = "Hasło zostało zresetowane"
       redirect_to root_url
