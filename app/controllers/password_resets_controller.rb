@@ -24,11 +24,16 @@ class PasswordResetsController < ApplicationController
     if params[:user][:password].empty?
       @user.errors.add(:password, "can't be empty")
       render 'edit'
-    elsif @user.update_attributes(user_params)
-      log_in @user
+    elsif @user && user.authenticated?(:reset, params[:id]) && !@user.password_reset_expired?
+      @user.update_attributes(user_params)
+      #log_in @user
       flash[:success] = "Hasło zostało zresetowane"
-      redirect_to @user
+      redirect_to root_url
+    elsif @user.password_reset_expired?
+      flash.now[:danger] = 'Link reetujący hasło jest za stary. Wygeneruj nowy.'
+      render 'edit'
     else
+      flash.now[:danger] = 'Błędny link'
       render 'edit'
     end
       
