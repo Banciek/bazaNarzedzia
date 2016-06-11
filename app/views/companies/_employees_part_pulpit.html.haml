@@ -10,9 +10,11 @@
 		.col-sm-offset-1.col-sm-5
 			.row
 				.col-xs-6
-					%a#expand{'href': '#'} rozwiń
+					%a#expand{'href': '#','data-toggle': "tooltip", 'data-placement': "top", title: "rozwiń wszystkie"}
+						%span.glyphicon.glyphicon-menu-hamburger
 					|
-					%a#fold{'href': '#'} zwiń
+					%a#fold{'href': '#','data-toggle': "tooltip", 'data-placement': "top", title: "zwiń wszystkie"}
+						%span.glyphicon.glyphicon-minus
 
 
 %ul#employees-list

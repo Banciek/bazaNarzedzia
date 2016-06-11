@@ -67,9 +67,11 @@ class ToolsCardsPdf < Prawn::Document
     move_down(10)
     table tool_rows do
       row(0).font_style = :bold
-      #self.cell_style = {border_lines: [:dashed, :dashed]}
+      #self.cell_style = {border_lines: [:dotted, :dotted]}
+      #row(0).cell_style = {border_lines: [:dotted, :solid]}
       self.header = true
       self.row_colors = ['DDDDDD', 'FFFFFF']
+      row(0).row_colors = "DDDDDD"
       self.width = 540
       #self.column_widths = [40, 400, 300, 60]
     end
@@ -83,7 +85,16 @@ class ToolsCardsPdf < Prawn::Document
   end
 
   def footer
-    draw_text ".........................", at: [0,0]
+    #draw_text ".........................", at: [0,0]
+    bounding_box([0,20], :width => 100, :height => 50) do
+      text "................................."
+      text "(podpis osoby przyjmującej dokument)", size: 8, align: :center
+    end
+
+    bounding_box([440,16], width: 100, height: 50) do
+      text "................................."
+      text "(podpis pracownika)", size: 8, align: :center
+    end    
     
   end
 
