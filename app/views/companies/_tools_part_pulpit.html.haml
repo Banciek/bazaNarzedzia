@@ -1,10 +1,11 @@
 #tools-list-title
-	Lista narzędzi:
-	- i = 0
-	- if !@tools.empty?
-		- @tools.each do |t|
-			- i += 1 if !t.employee_id.nil?
-	%span.badge= "#{i}/#{@tools.length}"
+	%p
+		Lista narzędzi:
+		- i = 0
+		- if !@tools.empty?
+			- @tools.each do |t|
+				- i += 1 if !t.employee_id.nil?
+		%span.badge= "#{i}/#{@tools.length}"
 	= link_to new_tool_path, remote: true do
 		#new-tool{'data-toggle': "tooltip", 'data-placement': "top", title: "dodaj narzędzie"} nowe
 - if !@tools.empty?

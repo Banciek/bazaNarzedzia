@@ -68,7 +68,8 @@ $(document).on "ready, page:change, page:update", ->
 		start: ->
 			$(this).addClass('active')
 			tool_id = $(this).attr("data-tool-id")
-
+			card_id = $(this).attr("data-card-id")
+			$('.card[data-card-id="'+card_id+'"]').addClass('assignedHereEvenIfDragging')
 			$('#employees-part .card').droppable
 				tolerance: 'pointer'
 				disabled: false
@@ -103,7 +104,8 @@ $(document).on "ready, page:change, page:update", ->
 				disabled: true
 			$('#employees-part #employee-tool').droppable
 				disabled: true
-				
+			card_id = $(this).attr("data-card-id")
+			$('.card[data-card-id="'+card_id+'"]').removeClass('assignedHereEvenIfDragging')
 
 	#handling drag and drop employees part pulpit elements
 	$('#employees-part .tool').draggable({ 
@@ -114,27 +116,34 @@ $(document).on "ready, page:change, page:update", ->
 		start: ->
 			$(this).addClass('active')
 			tool_id = $(this).attr("data-tool-id")
-			#alert(tool_id)
-			$(this).closest('.row').find('.card').droppable({
+			card_id = $(this).attr("data-card-id")
+			$('.card[data-card-id="'+card_id+'"]').addClass('assignedHereEvenIfDragging')
+			#$(this).closest('.row').find('.card').addClass('assignedHereEvenIfDragging')
+			#Uncomment next line and comment line after next if want to make droppable only current employee cards
+			#$(this).closest('.row').find('.card').droppable
+			$('#employees-part .card').droppable
 				tolerance: 'pointer'
 				disabled: false
 				activeClass: 'dropHere'
 				hoverClass: 'dropHover'
 				drop: ->
 					card_id = $(this).attr("data-card-id")
+					employee_id = $(this).closest('li').attr("id")
 					#alert(card_id)
 					$.ajax
 						type: "PUT"
 						url: '/tool_assign'
 						dataType: 'script'
-						data: {tool_id: tool_id, tools_card_id: card_id}
+						data: {tool_id: tool_id, tools_card_id: card_id, employee_id: employee_id}
 
-			})	
+				
 		stop: -> 
 			$(this).removeClass('active')
 			$(this).closest('.row').find('.card').droppable({
 				disabled: true
 			})
+			card_id = $(this).attr("data-card-id")
+			$('.card[data-card-id="'+card_id+'"]').removeClass('assignedHereEvenIfDragging')
 		})
 
 	#pulpit employee menu: folding and expanding
@@ -207,10 +216,10 @@ $(document).on "ready, page:change, page:update", ->
 		$('.tool[data-card-id="'+card_id+'"]').removeClass('dropHereTable')
 	$('.tool').mouseenter ->
 		card_id = $(this).attr("data-card-id")
-		$('.card[data-card-id="'+card_id+'"]').addClass('dropHere')
+		$('.card[data-card-id="'+card_id+'"]').addClass('assignedHere')
 	$('.tool').mouseleave ->
 		card_id = $(this).attr("data-card-id")
-		$('.card[data-card-id="'+card_id+'"]').removeClass('dropHere')	
+		$('.card[data-card-id="'+card_id+'"]').removeClass('assignedHere')	
 		#alert(card_id)
 
 

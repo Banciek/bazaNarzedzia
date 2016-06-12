@@ -53,6 +53,10 @@ class ToolsController < ApplicationController
   # PATCH/PUT /tools/1
   # PATCH/PUT /tools/1.json
   def update
+    #current_tool = Tool.find(@tool.id)
+    employee_id = params[:tool][:employee_id].to_i
+    @tool.tools_card_id = nil if employee_id != @tool.employee_id
+
     respond_to do |format|
       
       if @tool.update(tool_params)

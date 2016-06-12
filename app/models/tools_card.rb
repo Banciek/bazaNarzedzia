@@ -7,6 +7,8 @@ class ToolsCard < ActiveRecord::Base
 
   before_destroy :unbound_tools
 
+  validates :content, length: {maximum: 600}
+
   def unbound_tools
 
     tools.each do |tool|

@@ -1,6 +1,6 @@
 class ToolsCardsController < ApplicationController
   before_action :logged_in_user
-  before_action :admin_only, only: [:index]
+  before_action :admin_only, only: [:index, :edit]
   before_action :set_tools_card, only: [:show, :edit, :update, :destroy]
   before_action :correct_user?, only: [:show, :edit, :update, :destroy]
 
@@ -77,7 +77,10 @@ class ToolsCardsController < ApplicationController
         }
         format.json { render :show, status: :ok, location: @tools_card }
       else
-        format.html { render :edit }
+        format.html { 
+          redirect_to :back 
+          flash[:danger] = 'Zbyt długa treść dokumentu.'
+        }
         format.json { render json: @tools_card.errors, status: :unprocessable_entity }
       end
     end

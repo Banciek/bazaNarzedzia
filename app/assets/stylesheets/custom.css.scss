@@ -1,5 +1,5 @@
 $body-bg:    #1a1a1a;
-$font-size-base: 16px;
+$font-size-base: 14px;
 
 
 
@@ -112,6 +112,7 @@ tr td{
         text-align: center;
         margin-bottom: 5px;
         border-bottom: 1px solid grey;
+
     }
     #new-tool{
         //display:block;
@@ -232,7 +233,7 @@ tr td{
        cursor:grabbing;
     }
     .dropHere{
-       background-color: #ff751a; 
+       //background-color: #ff751a; 
        transition: all 0.25s;
        transform: scale(1.1);
        
@@ -248,6 +249,11 @@ tr td{
     .dropHoverTable{
         box-shadow: 0px 0px 5px 0px lightgreen;
     }
+    .assignedHere, .assignedHereEvenIfDragging{
+        background-color: grey;
+        transition: all 0.25s;
+    }
+
     .cloned{
         background-color: #f3f3f2;
         border: 0px solid grey;
@@ -283,8 +289,15 @@ tr td{
         }
     }
 }
+
 .pdf-preview{
     width: 100%;
     height: 1160px;
+}
+#addContentToToolsCard{
+    margin-bottom: 5px;
+}
+#TCbackButton{
+    margin-bottom: 20px;
 }
 
