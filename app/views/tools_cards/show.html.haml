@@ -97,5 +97,5 @@
 
 	.col-md-offset-1.col-md-6
 		%iframe.pdf-preview{src: "#{root_url}/tools_cards/#{@tools_card.id}.pdf", frameborder: 0}
-		= link_to 'Wyświetl w nowej karcie.', "#{root_url}/tools_cards/#{@tools_card.id}.pdf", class: "btn btn-default btn-block" 
+		= link_to 'Wyświetl w nowej karcie.', "#{root_url}/tools_cards/#{@tools_card.id}.pdf", class: "btn btn-default btn-block", target: '_blank' 
 			
