@@ -1,6 +1,18 @@
 %h2.text-center 
 	%small Zarządzaj narzędziami firmy:
 	= @company.name
+
+
+.well.well-sm#pulpit-settings
+	%span.glyphicon.glyphicon-cog
+	%p Podpowiedzi:
+	.slideThree
+		= check_box_tag 'settings', 'tooltip', checked="#{tooltips_enabled?}", id: 'tooltip-settings'
+		%label{'for': "tooltip-settings"}
+		-#%input{'type': "checkbox", 'value': 'tooltip', id: 'slideThree', 'name': "settings"}
+		-#	%label{'for': "slideThree"}
+
+
 .row#pulpit
 	=# render 'debugger'
 	.container-fluid

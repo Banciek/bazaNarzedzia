@@ -5,7 +5,7 @@
 		%h4
 			= @employee.first_name
 			= @employee.last_name
-		%p= "Kartę utworzono: #{@tools_card.created_at.to_s(:long)}"
+		%p= "Kartę utworzono: #{@tools_card.created_at.strftime("%d.%m.%Y, %H:%M")}"
 		%br
 		%h3 
 			Dane firmy:
@@ -96,6 +96,6 @@
 
 
 	.col-md-offset-1.col-md-6
-		%iframe.pdf-preview{src: "#{root_url}/tools_cards/#{@tools_card.id}.pdf", frameborder: 0}
-		= link_to 'Wyświetl w nowej karcie.', "#{root_url}/tools_cards/#{@tools_card.id}.pdf", class: "btn btn-default btn-block", target: '_blank' 
+		%iframe.pdf-preview{src: "#{root_url}tools_cards/#{@tools_card.id}.pdf", frameborder: 0}
+		= link_to 'Wyświetl w nowej karcie.', "#{root_url}tools_cards/#{@tools_card.id}.pdf", class: "btn btn-default btn-block", target: '_blank' 
 			

@@ -48,7 +48,7 @@
 									.text-right
 										= link_to card, remote: true, method: :delete, data: { confirm: "Czy napewno chcesz usunąć kartę?" } do
 											%span.glyphicon.glyphicon-remove{'data-toggle': "tooltip", 'data-placement': "right", title: "usuń"}
-									%p= "Utworzono: #{card.created_at.strftime("%d-%m-%Y | %H:%M")}"
+									%p= "Utworzono: #{card.created_at.strftime("%d.%m.%Y, %H:%M")}"
 									- i = 0
 									- @tools.each do |tool|
 										- i += 1 if tool.tools_card_id == card.id

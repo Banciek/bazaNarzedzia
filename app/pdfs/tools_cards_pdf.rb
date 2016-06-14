@@ -25,7 +25,7 @@ class ToolsCardsPdf < Prawn::Document
 
   def header
     #This inserts an image in the pdf file and sets the size of the image
-    draw_text "#{@company.city}: #{DateTime.now.to_date}", at: [420, 710], valign: :right
+    draw_text "#{@company.city}: #{DateTime.now.strftime("%d.%m.%Y")}", at: [420, 710], valign: :right
     
     text "#{@company.full_name}"
     text "#{@company.zip_code} #{@company.city}"
@@ -91,7 +91,7 @@ class ToolsCardsPdf < Prawn::Document
       text "(podpis osoby przyjmującej dokument)", size: 8, align: :center
     end
 
-    bounding_box([440,16], width: 100, height: 50) do
+    bounding_box([440,20], width: 100, height: 50) do
       text "................................."
       text "(podpis pracownika)", size: 8, align: :center
     end    

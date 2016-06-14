@@ -26,4 +26,9 @@ module CompaniesHelper
     end
   end
 
+  #check if tooltips are enabled
+  def tooltips_enabled?
+    cookies[:tooltips] ? false : true
+  end
+
 end

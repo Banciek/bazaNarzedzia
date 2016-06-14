@@ -43,7 +43,13 @@ expand = ->
 			
 	#alert('ok')
 
-
+tooltips_enabled = ->
+	if (document.cookie.indexOf('tooltips') > -1 )
+		$("#pulpit-settings input:checkbox[id='tooltip-settings']").prop('checked', false)
+		$('[data-toggle="tooltip"]').tooltip('disable')
+	else
+		$("#pulpit-settings input:checkbox[id='tooltip-settings']").prop('checked', true)
+		$('[data-toggle="tooltip"]').tooltip('enable')
 
 $(document).on "ready, page:change, page:update", -> 
 	#check and expand correct employee
@@ -54,10 +60,26 @@ $(document).on "ready, page:change, page:update", ->
 	$('[data-toggle="tooltip"]').on "click, mouseleave", ->
 		$('[data-toggle="tooltip"]').tooltip('hide')
 
+	#turn on bs popover
+	#$('[data-toggle="popover"]').popover()
+
 	#cookies acceptance
 	$('#accept_cookies_button').click ->
 		Cookies.set('cookies_ok', 'true', { expires: 365*20 })
 		$('#accept_cookies').fadeOut()
+
+	#pulpit-settings
+	#tooltip on/off
+	tooltips_enabled()
+	$("#pulpit-settings input:checkbox[id='tooltip-settings']").change ->
+		if $(this).is(":checked")
+			Cookies.remove('tooltips')
+			$('[data-toggle="tooltip"]').tooltip('enable')
+			
+		else
+			Cookies.set('tooltips', false, { expires: 365*20 })
+			$('[data-toggle="tooltip"]').tooltip('disable')
+			
 
 	#handling drag and drop tools part pulpit elements	
 	$('#tools-part .tool').draggable
