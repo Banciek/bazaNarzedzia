@@ -18,3 +18,4 @@
 
 #Ignore database config because of storing password for local db in it
 /config/database.yml
+/config/secrets.yml
