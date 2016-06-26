@@ -1,6 +1,6 @@
 == README
 
-It's my first app, so please be gentle :)
+It's my very first app, so please be gentle :)
 
 The only reason why I have created this application is to learn basics of web development.
 
