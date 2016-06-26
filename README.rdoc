@@ -5,6 +5,7 @@ It's my first app, so please be gentle :)
 The only reason why I have created this application is to learn basics of web development.
 
 I've learnt very basics of: 
+
 RoR, html.erb, haml.erb, javascript, coffescript, jquery, css, sass, prawnpdf, pstgresql, bootstrap, sessions and session data handling, data storing in cookies, jQueru UI, drag and drop functionallity and many many more...
 
 * Ruby version: 2.3.0
