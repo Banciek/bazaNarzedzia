@@ -8,6 +8,9 @@ I've learnt very basics of:
 
 RoR, html.erb, haml.erb, javascript, coffescript, jquery, css, sass, prawnpdf, pstgresql, bootstrap, sessions and session data handling, data storing in cookies, jQueru UI, drag and drop functionallity and many many more...
 
+
+
+
 * Ruby version: 2.3.0
 * Rails version: 4.2.5.2
 * DB: PostgreSQL
